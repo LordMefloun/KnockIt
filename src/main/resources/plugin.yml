@@ -4,3 +4,6 @@ main: me.lordmefloun.kek.knockit.KnockIt
 api-version: 1.18
 authors: [ LordMefloun ]
 description: Knockit skript rework
+commands:
+  knockit:
+    description: main command for plugin
