@@ -7,6 +7,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -66,20 +67,56 @@ public class Arena {
         victim.teleport(spectator);
         victim.setGameMode(GameMode.SPECTATOR);
         BroadcastMessage("&6&n" + victim.getName() + "&a was killed by &6&n" + (attacker == null ? "Void" : attacker.getName()));
-        for (int i = 0; i < 11; i++) {
-            if (i != 10)
-            {
-                Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
-                {
-                    victim.sendTitle("Respawn", "In 10 seconds");
-                }, 10 * i);
-            }
-        }
-        Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+
+        int delay = 10;
+
+        //COUNTING
+        if (true)
         {
-            victim.teleport(GetRandomLocation());
-            victim.setGameMode(GameMode.SURVIVAL);
-        }, 10 * 10);
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', "&a&lRespawning"),
+                        ChatColor.translateAlternateColorCodes('&', "&ain &c5")
+                );
+            }, delay * 0);
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', "&a&lRespawning"),
+                        ChatColor.translateAlternateColorCodes('&', "&ain &24")
+                );
+            }, delay * 1);
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', "&a&lRespawning"),
+                        ChatColor.translateAlternateColorCodes('&', "&ain &63")
+                );
+            }, delay * 2);
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', "&a&lRespawning"),
+                        ChatColor.translateAlternateColorCodes('&', "&ain &e2")
+                );
+            }, delay * 3);
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', "&a&lRespawning"),
+                        ChatColor.translateAlternateColorCodes('&', "&ain &a1")
+                );
+            }, delay * 4);
+
+
+            Bukkit.getScheduler().runTaskLater(KnockIt.plugin, () ->
+            {
+                victim.teleport(GetRandomLocation());
+                victim.setGameMode(GameMode.SURVIVAL);
+                victim.sendTitle("", "");
+            }, delay * 5);
+        }
     }
 
     private Location GetRandomLocation()
