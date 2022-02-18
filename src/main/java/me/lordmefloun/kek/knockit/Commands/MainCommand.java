@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -22,22 +24,24 @@ public class MainCommand implements CommandExecutor {
 
         if (args.length == 1)
         {
-            switch (args[0])
+            switch (args[0].toLowerCase())
             {
                 case "leave":
                     if (Arena.IsJoined(p))
                     {
+                        Message.SendMessage(p, "&aSuccessfully left arena &e" + Arena.GetArenaByPlayer(p).Name, true);
                         Arena.GetArenaByPlayer(p).Leave(p);
-                    } else Message.SendMessage(p, "&cYou are not joined in any arena", true );
+                    }
+                    else Message.SendMessage(p, "&cYou are not joined in any arena", true );
                     break;
                 default:
                     Message.SendMessage(p, "&cUnknown usage", true);
                     break;
             }
         }
-        if (args.length == 2)
+        else if (args.length == 2)
         {
-            switch (args[0])
+            switch (args[0].toLowerCase())
             {
                 case "join":
                     if (Arena.ArenaExists(args[1]))
